@@ -1,0 +1,3 @@
+# wordpress files
+wp-content/*
+!wp-content/themes/*
