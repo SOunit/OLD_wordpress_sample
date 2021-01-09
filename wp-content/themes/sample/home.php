@@ -1,5 +1,13 @@
+<?php
+/* 
+Template Name: Home page
+*/
+?>
+
+<!-- header -->
 <?php get_header(); ?>
 
+<!-- menu -->
 <?php get_template_part('content', 'menu'); ?>
 
 <!-- メインコンテンツ -->
@@ -113,4 +121,5 @@
 
 </div>
 
+<!-- footer -->
 <?php get_footer(); ?>
