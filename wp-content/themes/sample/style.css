@@ -294,3 +294,11 @@ input[type='submit'] {
   color: white;
   float: right;
 }
+
+.img-responsive {
+  width: 100%;
+}
+
+header .img-responsive {
+  vertical-align: middle;
+}

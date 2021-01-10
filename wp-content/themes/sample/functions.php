@@ -5,4 +5,8 @@ $custom_header_defaults = array(
     'header-text' => false,
 );
 
+// theme
 add_theme_support('custom-header', $custom_header_defaults);
+
+// custom nav
+register_nav_menu('mainmenu', 'main menu');

@@ -3,18 +3,17 @@
 <header class="site-width">
     <h1>
         <a href="<?php echo home_url(); ?>">
-            <img src="<?php header_image(); ?>" class="img-responsive" alt="<?php blog_info('name'); ?>">
+            <img src="<?php header_image(); ?>" class="img-responsive" alt="<?php bloginfo('name'); ?>">
         </a>
     </h1>
     <nav id="top-nav">
-        <ul>
-            <li><a href="index.html">HOME</a></li>
-            <li><a href="#about">ABOUT</a></li>
-            <li><a href="#merit">MERIT</a></li>
-            <li><a href="#recruit">RECRUIT</a></li>
-            <li><a href="contact.html">CONTACT</a></li>
-            <li><a href="map.html">MAP</a></li>
-            <li><a href="blog_list.html">BLOG</a></li>
-        </ul>
+        <?php
+        wp_nav_menu(array(
+            'theme_location' => 'mainmenu',
+            'container' => '',
+            'menu_class' => '',
+            'items_wrap' => '<ul>%3$s</ul>',
+        ));
+        ?>
     </nav>
 </header>
