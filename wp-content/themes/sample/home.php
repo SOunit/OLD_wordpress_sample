@@ -14,7 +14,7 @@ Template Name: Home page
 <div id="main">
 
     <!-- トップバナー -->
-    <img src="img/top-baner.png" id="top-baner">
+    <img src="<?php echo get_post_meta($post->ID, 'img-top', true); ?>" id="top-baner">
 
     <!-- ABOUT -->
     <section id="about" class="site-width">

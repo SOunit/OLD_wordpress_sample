@@ -86,7 +86,8 @@ function add_custom_inputbox()
      */
     add_meta_box('about_id', 'About Input', 'custom_area', 'page', 'normal');
     add_meta_box('recruit_id', 'Recruit Input', 'custom_area2', 'page', 'normal');
-    add_meta_box('map', 'Map Input', 'custom_area3', 'page', 'normal');
+    add_meta_box('map_id', 'Map Input', 'custom_area3', 'page', 'normal');
+    add_meta_box('top_img_id', 'Top Image URL Input', 'custom_area4', 'page', 'normal');
 }
 
 // show custom area in admin page
@@ -106,7 +107,7 @@ function custom_area2()
         echo '<tr>';
         echo '<td>info' . $i . '</td>';
         echo '<td>';
-        echo '<input col="50" row="5" name="recruit_info' . $i . '" >' . get_post_meta($post->ID, 'recruit_info' . $i, true) . '</input>';
+        echo '<input name="recruit_info' . $i . '" value="' . get_post_meta($post->ID, 'recruit_info' . $i, true) .  '" ></input>';
         echo '</td>';
         echo '</tr>';
     }
@@ -120,12 +121,20 @@ function custom_area3()
     echo 'Map: <textarea col="50" row="5" name="map">' . get_post_meta($post->ID, 'map', true) . '</textarea>';
 }
 
+function custom_area4()
+{
+    global $post;
+
+    echo 'Top Image URL: <input name="img-top" value="' . get_post_meta($post->ID, 'img-top', true) . '">';
+}
+
 // save and update when post button is clicked
 function save_custom_postdata($post_id)
 {
     $about_msg = '';
     $recruit_data = '';
     $map = '';
+    $img_top = '';
 
     // get data from custom field
     if (isset($_POST['about_msg'])) {
@@ -159,5 +168,15 @@ function save_custom_postdata($post_id)
         update_post_meta($post_id, 'map', $map);
     } elseif ($map == '') {
         delete_post_meta($post_id, 'map', get_post_meta($post_id, 'map', true));
+    }
+
+    // IMG TOP
+    if (isset($_POST['img-top'])) {
+        $img_top = $_POST['img-top'];
+    }
+    if ($img_top != get_post_meta($post_id, 'img-top', true)) {
+        update_post_meta($post_id, 'img-top', $img_top);
+    } elseif ($img_top == '') {
+        delete_post_meta($post_id, 'img-top', get_post_meta($post_id, 'img-top', true));
     }
 }
