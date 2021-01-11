@@ -3,27 +3,29 @@
 
 <!-- menu -->
 <?php get_template_part('content', 'menu'); ?>
-    
-    <div id="main">
 
-        <!-- blog_list -->
-        <section id="blog_list" class="site-width">
-            <h1 class="title">BLOG</h1>
-            <div id="content" class="article">
-                
-                <!-- loop article -->
-                <?php get_template_part('loop'); ?>
+<div id="main">
 
-                <?php if(function_exists("pagination") pagination($additional_loop->max_num_pages)); ?>
-            
-            </div>
+    <!-- blog_list -->
+    <section id="blog_list" class="site-width">
+        <h1 class="title">BLOG</h1>
+        <div id="content" class="article">
 
-            <!-- side bar -->
-            <?php get_sidebar(); ?>
+            <!-- loop article -->
+            <?php get_template_part('loop'); ?>
 
-        </section>
+            <?php if (function_exists("pagination")) {
+                pagination($wp_query->max_num_pages);
+            } ?>
 
-    </div>
+        </div>
 
-    <!-- footer -->
-    <?php get_footer(); ?>
+        <!-- side bar -->
+        <?php get_sidebar(); ?>
+
+    </section>
+
+</div>
+
+<!-- footer -->
+<?php get_footer(); ?>
