@@ -57,37 +57,37 @@ Template Name: Home page
             <thead>
                 <tr>
                     <th class="color1">RECRUIT</th>
-                    <th>ウェブカツ!!講師募集</th>
+                    <th><?php echo get_post_meta($post->ID, 'recruit_info1', true); ?></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <th>業務内容</th>
-                    <td>プログラミング教育動画の作成・ホームページの制作</td>
+                    <td><?php echo get_post_meta($post->ID, 'recruit_info2', true); ?></td>
                 </tr>
                 <tr>
                     <th>資格・経験</th>
-                    <td>HTML,CSS,PHPを学んだ事がある人なら、業務経験がなくても構いません！</td>
+                    <td><?php echo get_post_meta($post->ID, 'recruit_info3', true); ?></td>
                 </tr>
                 <tr>
                     <th>お給料</th>
-                    <td>お気持ちだけで</td>
+                    <td><?php echo get_post_meta($post->ID, 'recruit_info4', true); ?></td>
                 </tr>
                 <tr>
                     <th>勤務地</th>
-                    <td>自宅で構いません</td>
+                    <td><?php echo get_post_meta($post->ID, 'recruit_info5', true); ?></td>
                 </tr>
                 <tr>
                     <th>選考方法</th>
-                    <td>メールでお問合せ頂いた後にSkype電話にてお話させて頂きます。</td>
+                    <td><?php echo get_post_meta($post->ID, 'recruit_info6', true); ?></td>
                 </tr>
                 <tr>
                     <th>応募方法</th>
-                    <td>メールでご応募ください。</td>
+                    <td><?php echo get_post_meta($post->ID, 'recruit_info7', true); ?></td>
                 </tr>
                 <tr>
                     <th>応募先</th>
-                    <td>info@webukatu.com</td>
+                    <td><?php echo get_post_meta($post->ID, 'recruit_info8', true); ?></td>
                 </tr>
             </tbody>
         </table>

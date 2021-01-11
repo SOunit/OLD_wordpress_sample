@@ -85,6 +85,8 @@ function add_custom_inputbox()
      * )
      */
     add_meta_box('about_id', 'About Input', 'custom_area', 'page', 'normal');
+    add_meta_box('recruit_id', 'Recruit Input', 'custom_area2', 'page', 'normal');
+    add_meta_box('map', 'Map Input', 'custom_area3', 'page', 'normal');
 }
 
 // show custom area in admin page
@@ -95,20 +97,67 @@ function custom_area()
     echo 'comment: <textarea col="50" row="5" name="about_msg">' . get_post_meta($post->ID, 'about', true) . '</textarea>';
 }
 
+function custom_area2()
+{
+    global $post;
+
+    echo '<table>';
+    for ($i = 1; $i <= 8; $i++) {
+        echo '<tr>';
+        echo '<td>info' . $i . '</td>';
+        echo '<td>';
+        echo '<input col="50" row="5" name="recruit_info' . $i . '" >' . get_post_meta($post->ID, 'recruit_info' . $i, true) . '</input>';
+        echo '</td>';
+        echo '</tr>';
+    }
+    echo '</table>';
+}
+
+function custom_area3()
+{
+    global $post;
+
+    echo 'Map: <textarea col="50" row="5" name="map">' . get_post_meta($post->ID, 'map', true) . '</textarea>';
+}
+
 // save and update when post button is clicked
 function save_custom_postdata($post_id)
 {
     $about_msg = '';
+    $recruit_data = '';
+    $map = '';
 
     // get data from custom field
     if (isset($_POST['about_msg'])) {
         $about_msg = $_POST['about_msg'];
     }
-
     // update if content changed
     if ($about_msg != get_post_meta($post_id, 'about', true)) {
         update_post_meta($post_id, 'about', $about_msg);
     } elseif ($about_msg == '') {
         delete_post_meta($post_id, 'about', get_post_meta($post_id, 'about', true));
+    }
+
+    // RECRUIT
+    for ($i = 1; $i <= 8; $i++) {
+        if (isset($_POST['recruit_info' . $i])) {
+            $recruit_data = $_POST['recruit_info' . $i];
+        }
+
+        if ($recruit_data != get_post_meta($post_id, 'recruit_info' . $i, true)) {
+            update_post_meta($post_id, 'recruit_info' . $i, $recruit_data);
+        } elseif ($recruit_data == '') {
+            delete_post_meta($post_id, 'recruit_info' . $i, get_post_meta($post_id, 'recruit_info' . $i, true));
+        }
+    }
+
+    // MAP
+    if (isset($_POST['map'])) {
+        $map = $_POST['map'];
+    }
+    if ($map != get_post_meta($post_id, 'map', true)) {
+        update_post_meta($post_id, 'map', $map);
+    } elseif ($map == '') {
+        delete_post_meta($post_id, 'map', get_post_meta($post_id, 'map', true));
     }
 }
