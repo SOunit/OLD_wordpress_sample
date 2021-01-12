@@ -180,3 +180,96 @@ function save_custom_postdata($post_id)
         delete_post_meta($post_id, 'img-top', get_post_meta($post_id, 'img-top', true));
     }
 }
+
+// custom widget
+// add_actions(name?place?, function)
+
+// regist function for creating widget area
+add_action('widgets_init', 'my_widgets_area');
+// regist function to create widget
+add_action('widgets_init', function () {
+    register_widget('my_widgets_item1');
+});
+
+// create widget area
+function my_widgets_area()
+{
+    register_sidebar(array(
+        'name' => 'merit area',
+        'id' => 'widget_merit',
+        'before_widget' => '<div>',
+        'after_widget' => '</div>',
+    ));
+}
+
+// create widget
+class my_widgets_item1 extends WP_Widget
+{
+    // initialize
+    function my_widgets_item1()
+    {
+        parent::WP_Widget(false, $name = 'merit widget');
+    }
+
+    // create widget input field
+    function form($instance)
+    {
+        $title = esc_attr($instance['title']);
+        $body = esc_attr($instance['body']);
+?>
+        <!-- normal html area start -->
+        <p>
+            <label for="<?php echo $this->get_field_id('title'); ?>">
+                <?php echo 'title'; ?>
+            </label>
+            <input type="text" value="<?php echo $title; ?>" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title') ?>" class="widefat">
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id('body'); ?>">
+                <?php echo 'body'; ?>
+            </label>
+            <textarea row="16" cols="20" type="text" id="<?php echo $this->get_field_id('body'); ?>" name="<?php echo $this->get_field_name('body') ?>" class="widefat">
+                <?php echo $body; ?>
+            </textarea>
+        </p>
+        <!-- normal html area end -->
+        <?php
+    }
+
+    // save input
+    function update($new_instance, $old_instance)
+    {
+        $instance = $old_instance;
+        // remove php, html tags
+        $instance['title'] = strip_tags($new_instance['title']);
+        // remove spaces of start and end of text
+        $instance['body'] = trim($new_instance['body']);
+
+        return $instance;
+    }
+
+    // show widget from admin
+    function widget($args, $instance)
+    {
+        // set array to variable
+        extract($args);
+
+        // get input from widget
+        $title = apply_filters('widget_title', $instance['title']);
+        $body = apply_filters('widget_body', $instance['body']);
+
+        // show input if widget has it
+        if ($title) {
+        ?>
+            <!-- html start -->
+            <section class="panel">
+                <h2><?php echo $title; ?></h2>
+                <p>
+                    <?php echo $body; ?>
+                </p>
+            </section>
+            <!-- html end -->
+<?php
+        }
+    }
+}
