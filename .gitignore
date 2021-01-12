@@ -1,3 +1,15 @@
 # wordpress files
-wp-content/*
-!wp-content/themes/*
+# wp-content/*
+# !wp-content/themes/sample/*
+
+# the code above doesnt work, so added below
+wp-content/languages
+wp-content/plugins
+wp-content/upgrade
+wp-content/index.php
+wp-content/uploads
+
+wp-content/themes/index.php
+wp-content/themes/twentynineteen
+wp-content/themes/twentytwenty
+wp-content/themes/twentytwentyone
