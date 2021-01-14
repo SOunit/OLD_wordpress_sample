@@ -200,6 +200,15 @@ function my_widgets_area()
         'before_widget' => '<div>',
         'after_widget' => '</div>',
     ));
+
+    register_sidebar(array(
+        'name' => 'right sidebar',
+        'id' => 'my_sidebar',
+        'before_widget' => '<div>',
+        'after_widget' => '</div>',
+        'before_title' => '<h2>',
+        'after_title' => '</h2>',
+    ));
 }
 
 // create widget
